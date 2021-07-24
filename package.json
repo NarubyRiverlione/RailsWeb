@@ -1,0 +1,156 @@
+{
+  "name": "railweb",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^12.20.16",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "railsmodel": "file:../RailsModel/railsmodel-0.1.0.tgz",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-gridlines": "^1.1.7",
+    "react-scripts": "4.0.3",
+    "react-svg": "^14.0.5",
+    "typescript": "^4.3.5",
+    "web-vitals": "^1.1.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "cypress": "^8.0.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint . --fix"
+  },
+  "eslintConfig": {
+    "globals": {
+      "JSX": true,
+      "screen": true
+    },
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "airbnb-typescript"
+    ],
+    "plugins": [
+      "react",
+      "jest"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    },
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "rules": {
+      "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/camelcase": "off",
+      "@typescript-eslint/lines-between-class-members": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "no-unused-vars": "off",
+      "no-debugger": "warn",
+      "react-hooks/rules-of-hooks": "error",
+      "max-len": [
+        "warn",
+        {
+          "code": 150,
+          "comments": 150
+        }
+      ],
+      "@typescript-eslint/indent": [
+        "warn",
+        2
+      ],
+      "jsx-a11y/no-noninteractive-element-interactions": [
+        "warn"
+      ],
+      "jsx-a11y/click-events-have-key-events": [
+        "warn"
+      ],
+      "jsx-a11y/no-static-element-interactions": [
+        "warn"
+      ],
+      "linebreak-style": [
+        0
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "@typescript-eslint/semi": [
+        "error",
+        "never"
+      ],
+      "no-mixed-spaces-and-tabs": [
+        "warn",
+        "smart-tabs"
+      ],
+      "no-console": [
+        "off"
+      ],
+      "react/forbid-prop-types": [
+        0
+      ],
+      "react/jsx-fragments": [
+        2,
+        "element"
+      ],
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "ts": "never",
+          "tsx": "never"
+        }
+      ],
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".tsx",
+            ".jsx"
+          ]
+        }
+      ],
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-use-before-define": [
+        "error"
+      ]
+    },
+    "ignorePatterns": [
+      "build/*"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
