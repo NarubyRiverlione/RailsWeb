@@ -1,1 +1,1 @@
-declare module "react-gridlines"
+declare module 'react-gridlines'
