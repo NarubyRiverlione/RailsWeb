@@ -1,4 +1,7 @@
 import { Track } from 'railsmodel'
+import { Rail } from 'railsmodel/lib/Model/Rails'
+import { SectionStatus } from 'railsmodel/lib/Model/Sections'
+import { Fragment } from 'react'
 import RailSvg from '../Rails/RailSvg'
 
 type TackSvgTypes = {
@@ -6,16 +9,24 @@ type TackSvgTypes = {
 }
 
 const TackSvg = ({ TrackObj }: TackSvgTypes) => {
-  const { Sections } = TrackObj
+  const { sections } = TrackObj
+  const allRails: Rail[] = []
 
-  const { Rails, Status } = Sections[0]
+  // get all rails for all sections in this trace
+  sections.forEach((section) => {
+    for (let railNr = 0; railNr < section.CountRails; railNr += 1) {
+      allRails.push(section.GetRail(railNr))
+    }
+  })
 
   return (
-    <svg height="80vh" width="100vw" stroke="white">
-      {// eslint-disable-next-line react/no-array-index-key
-        Rails.map((rail, id) => <RailSvg key={id} X={rail.X} Y={rail.Y} RailDirection={rail.Direction} Status={Status} />)
+    <Fragment>
+      { // FIXME: section status not available in array of all rails in track
+        // eslint-disable-next-line react/no-array-index-key
+        allRails.map((rail, id) => <RailSvg key={id} X={rail.X} Y={rail.Y} RailDirection={rail.Direction} Status={SectionStatus.Unknown} />)
       }
-    </svg>
+    </Fragment>
+
   )
 }
 

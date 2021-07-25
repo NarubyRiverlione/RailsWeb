@@ -1,5 +1,6 @@
 import Direction from 'railsmodel/lib/Model/Direction'
 
+import { SectionStatus } from 'railsmodel/lib/Model/Sections'
 import Horizontal from './Horizontal'
 import Vertical from './Vertical'
 import Left from './Left'
@@ -12,11 +13,17 @@ import DownLeft from './DownLeft'
 import DownRight from './DownRight'
 import UpLeft from './UpLeft'
 import UpRight from './UpRight'
-import { RailSvgType } from './RailHelpers'
+
+type RailType = {
+  X: number;
+  Y: number;
+  Status: SectionStatus;
+  RailDirection: Direction
+}
 
 const RailSvg = ({
-  X, Y, Scale = 1, Status, RailDirection,
-}: RailSvgType) => {
+  X, Y, Status, RailDirection,
+}: RailType) => {
   //  if (!RailDirection) throw new Error('Need direction of rail')
   switch (RailDirection) {
     case Direction.Vertical: return <Vertical X={X} Y={Y} Status={Status} />

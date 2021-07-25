@@ -23,7 +23,7 @@ header {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: calc(10px + 2vmin);
+  /* font-size: calc(10px + 2vmin); */
   margin: 5px;
   padding: 10px;
   border: white ;
