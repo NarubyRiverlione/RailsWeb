@@ -1,15 +1,12 @@
-import { Track } from 'railsmodel'
 import { Rail } from 'railsmodel/lib/Model/Rails'
 import { SectionStatus } from 'railsmodel/lib/Model/Sections'
 import { Fragment } from 'react'
+import useRailContext from '../../RailContext'
 import RailSvg from '../Rails/RailSvg'
 
-type TackSvgTypes = {
-  TrackObj: Track
-}
-
-const TackSvg = ({ TrackObj }: TackSvgTypes) => {
-  const { sections } = TrackObj
+const TackSvg = () => {
+  const { RailTrack } = useRailContext()
+  const { sections } = RailTrack
   const allRails: Rail[] = []
 
   // get all rails for all sections in this trace

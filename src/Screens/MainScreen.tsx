@@ -1,39 +1,28 @@
-import Tracks from 'railsmodel'
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment } from 'react'
 
 import GridLines from 'react-gridlines'
 import TackSvg from '../Components/Track/TrackSvg'
-// import testTrack from '../testTrack.json'
+import useRailContext from '../RailContext'
 
-type MainScreenTypes = {
-  TraceFile: Blob
-  UpdateMouse: (X: number, Y: number) => void
-}
-
-const MainScreen = ({ TraceFile, UpdateMouse }: MainScreenTypes) => {
-  const [track, setTrack] = useState(new Tracks())
-  // load & paste Trace file
-  useEffect(() => {
-    TraceFile.text()
-      .then((text) => {
-        if (!text) return
-        const loadedTrack = new Tracks()
-        loadedTrack.ParseJson(text)
-        setTrack(loadedTrack)
-      })
-      .catch((err) => { console.error(err.message) })
-  }, [TraceFile])
+const MainScreen = () => {
+  const { setMousePosition } = useRailContext()
 
   // send mouse coordinates
-  const mouseCoordinates = (event: React.MouseEvent<SVGGElement, MouseEvent>) => {
+  const UpdateMouseCoordinates = (event: React.MouseEvent<SVGGElement, MouseEvent>) => {
     event.stopPropagation()
-    UpdateMouse(event.clientX - 10, event.clientY - 120)
+    const X = event.clientX // - 10
+    const Y = event.clientY - 120
+    console.log(`${X}/${Y}`)
+
+    const railX = Math.floor(X / 20)
+    const railY = Math.floor(Y / 20)
+    setMousePosition({ X: railX, Y: railY })
   }
   return (
     <Fragment>
       <GridLines cellWidth={20} strokeWidth={1} lineColor="gray" dashArray="5,5">
-        <svg height="80vh" width="100vw" stroke="white" onMouseDown={(e) => mouseCoordinates(e)}>
-          {track.Name !== '' && <TackSvg TrackObj={track} />}
+        <svg height="80vh" width="100vw" stroke="white" onMouseDown={(e) => UpdateMouseCoordinates(e)}>
+          <TackSvg />
         </svg>
       </GridLines>
     </Fragment>

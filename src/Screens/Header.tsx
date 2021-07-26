@@ -1,13 +1,25 @@
-type HeaderTypes = {
-  cbTraceFilename: (filename: Blob) => void
-  MouseX: number
-  MouseY: number
-}
-const Header = ({ cbTraceFilename, MouseX, MouseY }: HeaderTypes) => {
-  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: { files } } = event
-    if (files?.length !== 1) return
-    cbTraceFilename(files[0])
+import Tracks from 'railsmodel'
+import useRailContext from '../RailContext'
+
+const Header = () => {
+  const { setRailTrack, setErrorMsg, MousePosition } = useRailContext()
+
+  const LoadTrackFromFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      const { target: { files } } = event
+      if (files?.length !== 1) return
+      const TraceFile = files[0]
+
+      const text = await TraceFile.text()
+      if (!text) return
+
+      const loadedTrack = new Tracks()
+      loadedTrack.ParseJson(text)
+      setRailTrack(loadedTrack)
+    } catch (err) {
+      console.error(err.message)
+      setErrorMsg(err.message)
+    }
   }
 
   return (
@@ -15,10 +27,10 @@ const Header = ({ cbTraceFilename, MouseX, MouseY }: HeaderTypes) => {
       <h1>Rails</h1>
       <div>
         Load trace file
-        <input type="file" name="file" onChange={changeHandler} />
+        <input type="file" name="file" onChange={LoadTrackFromFile} />
       </div>
       <div>
-        {`Mouse position X:${MouseX} Y:${MouseY}`}
+        {`Mouse position X:${MousePosition.X} Y:${MousePosition.Y}`}
       </div>
 
     </header>
